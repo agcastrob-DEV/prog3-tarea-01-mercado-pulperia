@@ -224,3 +224,7 @@ En Windows puede usar clic derecho → Comprimir.
 
 Suba el `.zip` al aula virtual antes del **8 de junio de 2026**.
 Opcionalmente puede adjuntar también el link a su fork de GitHub.
+
+### Resumen de Implementación Técnico
+
+Para cumplir con las reglas del negocio del sistema de cobro, se modificó la clase existente `Limpieza` completando la inicialización de su constructor, definiendo la fórmula matemática de impuestos y descuentos en `precioFinal()`, e implementando formalmente el contrato de la interfaz `Descontable` para retornar el dinero exacto de la rebaja a través de un método setter con validación de rangos lógicos. Asimismo, se intervino el componente analítico `Mercado` para sustituir los bloques vacíos con algoritmos de búsqueda lineal que identifican el artículo más caro, el más barato y acumulan el ahorro total aplicando filtros de tipo en tiempo de ejecución. Finalmente, el proyecto evidencia el uso de un loop polimórfico en la clase principal, el cual recorre un arreglo de tipo general `Producto` y delega dinámicamente en la máquina virtual de Java la ejecución de los comportamientos específicos de cada subclase.

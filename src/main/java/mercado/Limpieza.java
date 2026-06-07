@@ -20,29 +20,68 @@ public class Limpieza extends Producto implements Descontable {
     // HERENCIA: super(...) delega los atributos comunes a Producto.
     public Limpieza(String nombre, double precioBase, int cantidad, double porcentajeDescuento) {
         super(nombre, precioBase, cantidad);
-        // TODO: inicializar el atributo de descuento
+        this.porcentajeDescuento = porcentajeDescuento;
     }
 
     // ABSTRACCIÓN: contrato que Producto obliga a cada subclase a definir.
     // Tip: los campos de Producto son private — use los métodos de acceso heredados.
     @Override
     public double precioFinal() {
-        // TODO: precio con IVA 13%, menos el descuento
-        return 0;
+
+        double total = getPrecioBase() * getCantidad() * 1.13 - aplicarDescuento();
+        return total;
     }
 
     // ABSTRACCIÓN / INTERFACE: implementa el contrato de Descontable.
     @Override
     public double aplicarDescuento() {
         // TODO: monto que se descuenta al subtotal
-        return 0;
+        //return 0;
+        return getPrecioBase() * getCantidad() * this.porcentajeDescuento;
     }
 
     // ENCAPSULAMIENTO: setter con validación — el objeto controla su propio estado.
     // TODO: implementar setPorcentajeDescuento(double pct)
     //   Solo acepte valores en el rango válido para un porcentaje; informe si el valor es rechazado.
 
+    public void setPorcentajeDescuento(double pct) {
+        
+        if (pct < 0.0 || pct > 1.0) {
+
+            /*   Manera para imprimir el porcentaje inválido ingresado mas amigable al usuario
+            String pct_porcentaje = (pct * 100) +"%" ;
+
+            System.out.println("Descuento Inválido " + pct_porcentaje); */
+
+            //Impresión esperada del error
+            System.out.println("Descuento Inválido " + pct);
+            
+
+        } else {
+
+            this.porcentajeDescuento = pct;
+
+        }
+
+    }
+
     // OVERLOADING: misma operación, distinto contrato.
     // TODO: agregar promo() y promo(boolean conEtiqueta)
     //   Una versión imprime la promoción básica; la otra puede mostrar información adicional.
+    // Modo 1: Anuncio básico en la pantalla del cajero
+    public void promo() {
+        System.out.println("¡Promoción especial en productos de Limpieza!");
+    }
+
+    // Modo 2: Si mandan un "true", imprime un recibo detallado con el porcentaje
+    public void promo(boolean conEtiqueta) {
+        if (conEtiqueta) {
+            System.out.println("=========================================");
+            System.out.println("ETIQUETA VERDE - Descuento del: " + (this.porcentajeDescuento * 100) + "%");
+            System.out.println("=========================================");
+        } else {
+            // Si mandan un "false", simplemente ejecuta el Modo 1 para no repetir código
+            promo();
+        }
+    }
 }

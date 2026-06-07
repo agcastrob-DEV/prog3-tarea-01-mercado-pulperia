@@ -68,4 +68,20 @@ public class Limpieza extends Producto implements Descontable {
     // OVERLOADING: misma operación, distinto contrato.
     // TODO: agregar promo() y promo(boolean conEtiqueta)
     //   Una versión imprime la promoción básica; la otra puede mostrar información adicional.
+    // Modo 1: Anuncio básico en la pantalla del cajero
+    public void promo() {
+        System.out.println("¡Promoción especial en productos de Limpieza!");
+    }
+
+    // Modo 2: Si mandan un "true", imprime un recibo detallado con el porcentaje
+    public void promo(boolean conEtiqueta) {
+        if (conEtiqueta) {
+            System.out.println("=========================================");
+            System.out.println("ETIQUETA VERDE - Descuento del: " + (this.porcentajeDescuento * 100) + "%");
+            System.out.println("=========================================");
+        } else {
+            // Si mandan un "false", simplemente ejecuta el Modo 1 para no repetir código
+            promo();
+        }
+    }
 }

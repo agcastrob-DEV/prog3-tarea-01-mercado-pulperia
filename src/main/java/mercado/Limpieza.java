@@ -36,12 +36,34 @@ public class Limpieza extends Producto implements Descontable {
     @Override
     public double aplicarDescuento() {
         // TODO: monto que se descuenta al subtotal
-        return 0;
+        //return 0;
+        return getPrecioBase() * getCantidad() * this.porcentajeDescuento;
     }
 
     // ENCAPSULAMIENTO: setter con validación — el objeto controla su propio estado.
     // TODO: implementar setPorcentajeDescuento(double pct)
     //   Solo acepte valores en el rango válido para un porcentaje; informe si el valor es rechazado.
+
+    public void setPorcentajeDescuento(double pct) {
+        
+        if (pct < 0.0 || pct > 1.0) {
+
+            /*   Manera para imprimir el porcentaje inválido ingresado mas amigable al usuario
+            String pct_porcentaje = (pct * 100) +"%" ;
+
+            System.out.println("Descuento Inválido " + pct_porcentaje); */
+
+            //Impresión esperada del error
+            System.out.println("Descuento Inválido " + pct);
+            
+
+        } else {
+
+            this.porcentajeDescuento = pct;
+
+        }
+
+    }
 
     // OVERLOADING: misma operación, distinto contrato.
     // TODO: agregar promo() y promo(boolean conEtiqueta)

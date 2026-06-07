@@ -66,8 +66,24 @@ public class Mercado {
      * cada clase que implementa la interface define de forma diferente.
      */
     public static double totalDescuentos(Producto[] carrito) {
-        // TODO: si p instanceof Descontable → cast → sumar aplicarDescuento()
-        //   Pista: Descontable d = (Descontable) p;
-        return 0;
+        // Paso 1: Creamos una bolsa acumuladora para ir guardando el ahorro total
+        double ahorroTotal = 0;
+        
+        // Paso 2: Pasamos uno por uno los productos de la banda
+        for (Producto p : carrito) {
+            
+            // FILTRO DE SEGURIDAD: ¿Este producto tiene descuento disponible?
+            if (p instanceof Descontable) {
+                
+                // TRANSFORMACIÓN: Activamos sus propiedades de Descontable
+                Descontable d = (Descontable) p;
+                
+                // ACUMULACIÓN: Sumamos el monto de su descuento a la bolsa
+                ahorroTotal += d.aplicarDescuento();
+            }
+        }
+        
+        // Paso 3: Devolvemos la suma de toda la plata ahorrada
+        return ahorroTotal;
     }
 }
